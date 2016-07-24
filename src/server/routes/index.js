@@ -46,8 +46,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/list', function(req, res, next) {
-  //returns a list
-  //QUERY - select dishes from dishes_list
+
   new Recipe().fetchAll()
     .then(function(articles) {
       res.send(articles.toJSON());
@@ -59,21 +58,10 @@ router.get('/list', function(req, res, next) {
   var obj = { a: 1 };
   var result = JSON.stringify(obj);
 
-  // res.render('index', { title: 'Eatables' });
-  // res.send(result);
 });
 
-///documents/:format/:type
+//posting title,content
 router.get('/recipe/:title/:content', function(req, res, next) {
-  //returns a list
-  //QUERY - select dishes from dishes_list
-  // new Recipe().fetchAll()
-  //   .then(function(articles) {
-  //     res.send(articles.toJSON());
-  //   }).catch(function(error) {
-  //     console.log(error);
-  //     res.send('An error occured');
-  //   });
 
   var format = req.params.title,
        type = req.params.content;
@@ -81,15 +69,37 @@ router.get('/recipe/:title/:content', function(req, res, next) {
   var obj = { a: format,b: type };
   var result = JSON.stringify(obj);
 
-  // knex('recipe').insert({title: format,content:type})
-
   new Recipe({title: format,content:type}).save().then(function(model) {
    console.log(model);
   });
 
-  // res.render('index', { title: 'Eatables' });
   res.send(result);
 });
+
+//delete a recipe
+router.get('/delete/:id', function(req, res, next) {
+
+  var idVal = req.params.id;
+
+  // new Recipe().save().then(function(model) {
+  //  console.log(model);
+  // });
+
+  // new
+  new Recipe({'id':idVal}).destroy().then(function(model){
+    new Recipe().fetchAll()
+      .then(function(articles) {
+        res.send(articles.toJSON());
+      }).catch(function(error) {
+        console.log(error);
+        res.send('An error occured');
+      });
+    // res.send(result);
+  });
+  var result = "";
+  res.send(result);
+});
+
 
 
 module.exports = router;

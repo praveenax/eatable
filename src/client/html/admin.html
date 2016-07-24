@@ -2,12 +2,20 @@
   <div class="col-md-6">
     <h3>List of Recipes:</h3>
     <div class="list-group" style="height: 500px;overflow: auto;">
-      <a href="#" class="list-group-item" ng-repeat="recipe in adminRecipeList" >
+      <div class="list-group-item" ng-repeat="recipe in adminRecipeList" >
 
-            <h4 class="list-group-item-heading">{{recipe.title}}</h4>
+        <div class="row">
+          <div class="col-md-10">
+            <h4 class="list-group-item-heading">{{recipe.id}} {{recipe.title}}</h4>
             <p class="list-group-item-text">{{recipe.content}}</p>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-danger form-control" ng-click="deleteRecipe(recipe.id)" >Delete</button>
+          </div>
+        </div>
 
-      </a>
+
+      </div>
     </div>
   </div>
 

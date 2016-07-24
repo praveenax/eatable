@@ -48,7 +48,7 @@ myApp.controller('adminCntrl', function ($scope, $http) {
     $http.get("/list").success(function (data, status) {
 
         console.log(data);
-
+        console.log(data.length);
         $scope.adminRecipeList = data;
 
     });
@@ -57,13 +57,29 @@ myApp.controller('adminCntrl', function ($scope, $http) {
 
         $http.get("/recipe/"+title+"/"+content).success(function (data, status) {
 
-            $http.get("/list").success(function (data, status) {
+        }).then(function(){
+          $http.get("/list").success(function (data, status) {
+              // $scope.adminRecipeList = [];
+              $scope.adminRecipeList = data;
 
-                $scope.adminRecipeList = data;
-
-            });
-
+          });
         });
+
+    };
+
+
+    $scope.deleteRecipe = function(id){
+
+      $http.get("/delete/"+id).success(function (data, status) {
+        scope.adminRecipeList = data;
+      }).then(function(){
+        // $http.get("/list").success(function (data, status) {
+        //     console.log(data.length);
+        //     $scope.adminRecipeList = data;
+        //
+        // });
+
+      });
 
     };
 
