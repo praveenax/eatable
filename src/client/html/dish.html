@@ -1,0 +1,22 @@
+<div ng-repeat="c in colorList"  class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-body" >
+      <div class="row">
+        <div class="col-md-9">
+          <h4>{{c}}</h4>
+        </div>
+        <div class="col-md-3">
+          <button type="button" name="button" class="btn btn-default" style="width:100%;">View</button>
+          <!-- <a href="#">View</a> -->
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="panel-body">
+      <img src="http://lorempixel.com/400/200/food/{{$index + 1}}" alt="" style="margin: auto;display: block;width:100%;" />
+      <!-- {{c}} is test -->
+    </div>
+  </div>
+</div>

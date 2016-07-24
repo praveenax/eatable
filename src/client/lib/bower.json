@@ -1,0 +1,22 @@
+{
+  "name": "lib",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "fontawesome#^4.6.3",
+    "animate.css": "^3.5.2",
+    "AngularJS": "angular-latest#^1.5.8",
+    "angular-ui-router": "^0.3.1"
+  }
+}
