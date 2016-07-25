@@ -1,0 +1,34 @@
+<div class="" ng-controller="adminCntrl" >
+  <div class="col-md-6">
+    <h3>List of Recipes:</h3>
+    <div class="list-group" style="height: 500px;overflow: auto;">
+      <div class="list-group-item" ng-repeat="recipe in adminRecipeList" >
+
+        <div class="row">
+          <div class="col-md-10">
+            <h4 class="list-group-item-heading">{{recipe.id}} {{recipe.title}}</h4>
+            <p class="list-group-item-text">{{recipe.content}}</p>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-danger form-control" ng-click="deleteRecipe(recipe.id)" >Delete</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Create New Recipes:</h3>
+    <input type="text" value="" class="form-control" ng-model="recipeTitle" placeholder="Enter Recipe Title:" >
+    <br>
+    <!-- <input type="text" value="" class="form-control" ng-model="recipeContent" placeholder="Enter Recipe Content:" > -->
+    <!-- <textarea rows="4" cols="50">
+
+   </textarea> -->
+   <textarea class="form-control" rows="8" cols="40" placeholder="Enter Recipe Content Here!"  ng-model="recipeContent" ></textarea>
+    <br>
+    <button class="btn btn-default col-md-6 col-md-offset-6" ng-click="saveRecipe(recipeTitle,recipeContent)" > Create New Recipe</button>
+  </div>
+</div>

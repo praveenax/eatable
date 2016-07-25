@@ -13,6 +13,11 @@ myApp.config(function ($routeProvider, $sceDelegateProvider) {
             templateUrl: 'html/dish.html',
 //        templateUrl: 'http://assets.braingain.co/frontend/html/Feed.html',
             controller: 'cntrl'
+        })
+        .when('/admin', {
+            templateUrl: 'html/admin.html',
+//        templateUrl: 'http://assets.braingain.co/frontend/html/Feed.html',
+            controller: 'adminCntrl'
         });
 
 
@@ -23,10 +28,60 @@ myApp.controller('cntrl', function ($scope, $http) {
     $http.defaults.xsrfCookieName = 'csrftoken';
     $http.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-    $scope.colorList = [
-        "lightBlue", "lightGreen", "lightViolet", "yellow", "orange", "red"
-    ];
+    $scope.colorList = [];
 
+    $http.get("/list").success(function (data, status) {
+
+        console.log(data);
+
+        $scope.colorList = data;
+
+    })
+});
+
+myApp.controller('adminCntrl', function ($scope, $http) {
+    $http.defaults.xsrfCookieName = 'csrftoken';
+    $http.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+    $scope.adminRecipeList = [];
+
+    $http.get("/list").success(function (data, status) {
+
+        console.log(data);
+        console.log(data.length);
+        $scope.adminRecipeList = data;
+
+    });
+
+    $scope.saveRecipe = function(title,content){
+
+        $http.get("/recipe/"+title+"/"+content).success(function (data, status) {
+
+        }).then(function(){
+          $http.get("/list").success(function (data, status) {
+              // $scope.adminRecipeList = [];
+              $scope.adminRecipeList = data;
+
+          });
+        });
+
+    };
+
+
+    $scope.deleteRecipe = function(id){
+
+      $http.get("/delete/"+id).success(function (data, status) {
+        scope.adminRecipeList = data;
+      }).then(function(){
+        // $http.get("/list").success(function (data, status) {
+        //     console.log(data.length);
+        //     $scope.adminRecipeList = data;
+        //
+        // });
+
+      });
+
+    };
 
 
 });

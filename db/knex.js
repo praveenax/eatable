@@ -3,12 +3,12 @@ var config = require('../knexfile')[environment];
 var knex = require('knex')(config);
 var bookshelf = require('bookshelf')(knex);
 
-// module.exports = require('knex')(config);
+knex.schema.createTableIfNotExists('recipe2', function (recipe) {
+    recipe.increments(),
+    recipe.string('title'),
+    recipe.string('content')
+}).then(function () {
 
-var User = bookshelf.Model.extend({
-  tableName: 'users',
-  name:'name'
-  // posts: function() {
-  //   return this.hasMany(Posts);
-  // }
 });
+
+module.exports = require('knex')(config);
