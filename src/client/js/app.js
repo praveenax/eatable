@@ -36,7 +36,12 @@ myApp.controller('cntrl', function ($scope, $http) {
 
         $scope.colorList = data;
 
-    })
+    });
+
+    $scope.viewRecipe = function(id){
+      console.log("ID==>"+id);
+
+    };
 });
 
 myApp.controller('adminCntrl', function ($scope, $http) {
