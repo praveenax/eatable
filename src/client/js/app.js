@@ -1,5 +1,7 @@
 var myApp = angular.module('eatable', ['ngRoute']);
 
+var titleVal = "";
+var contentVal = "";
 
 myApp.config(function ($routeProvider, $sceDelegateProvider) {
 
@@ -18,13 +20,18 @@ myApp.config(function ($routeProvider, $sceDelegateProvider) {
             templateUrl: 'html/admin.html',
 //        templateUrl: 'http://assets.braingain.co/frontend/html/Feed.html',
             controller: 'adminCntrl'
+        })
+        .when('/view', {
+            templateUrl: 'html/view.html',
+//        templateUrl: 'http://assets.braingain.co/frontend/html/Feed.html',
+            controller: 'viewCntrl'
         });
 
 
 });
 
 
-myApp.controller('cntrl', function ($scope, $http) {
+myApp.controller('cntrl', function ($scope, $http,$window) {
     $http.defaults.xsrfCookieName = 'csrftoken';
     $http.defaults.xsrfHeaderName = 'X-CSRFToken';
 
@@ -40,7 +47,19 @@ myApp.controller('cntrl', function ($scope, $http) {
 
     $scope.viewRecipe = function(id){
       console.log("ID==>"+id);
+      $http.get("/viewRecipe/"+id).success(function (data, status) {
 
+          console.log(data);
+          var title = data.title;
+          var content = data.content;
+
+          $window.location.href = '#/view';
+
+          titleVal = data.title;
+          contentVal = data.content;
+
+
+      });
     };
 });
 
@@ -49,6 +68,8 @@ myApp.controller('adminCntrl', function ($scope, $http) {
     $http.defaults.xsrfHeaderName = 'X-CSRFToken';
 
     $scope.adminRecipeList = [];
+
+
 
     $http.get("/list").success(function (data, status) {
 
@@ -91,6 +112,11 @@ myApp.controller('adminCntrl', function ($scope, $http) {
 
 });
 
+myApp.controller('viewCntrl', function ($scope, $http) {
+  console.log(titleVal);
+  $scope.title = titleVal;
+  $scope.content = contentVal;
+});
 myApp.directive('playmeter', function () {
     return {
         restrict: 'E',
