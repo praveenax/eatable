@@ -80,7 +80,7 @@ gulp.task('lint', function() {
 gulp.task('browser-sync', ['nodemon'], function(done) {
   browserSync({
     proxy: "localhost:3000",  // local node app address
-    port: 5000,  // use *different* port than above
+    port: 5001,  // use *different* port than above
     notify: true
   }, done);
 });
