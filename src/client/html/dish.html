@@ -4,10 +4,10 @@
       <div class="panel-body" style="padding-bottom: 4px;">
         <div class="row">
           <div class="col-md-9">
-            <h4>{{c.title}}</h4>
+            <h4>{{c.id}} {{c.title}}</h4>
           </div>
           <div class="col-md-3">
-            <button type="button" name="button" class="btn btn-default" style="width:100%;">View</button>
+            <button type="button" name="button" class="btn btn-default" style="width:100%;" ng-click="viewRecipe(c.id)" >View</button>
             <!-- <a href="#">View</a> -->
           </div>
         </div>

@@ -3,10 +3,11 @@ var config = require('../knexfile')[environment];
 var knex = require('knex')(config);
 var bookshelf = require('bookshelf')(knex);
 
-knex.schema.createTableIfNotExists('recipe2', function (recipe) {
+knex.schema.createTableIfNotExists('recipe3', function (recipe) {
     recipe.increments(),
     recipe.string('title'),
-    recipe.string('content')
+    recipe.timestamps(),
+    recipe.text('content')
 }).then(function () {
 
 });

@@ -60,6 +60,24 @@ router.get('/list', function(req, res, next) {
 
 });
 
+router.get('/viewRecipe/:id', function(req, res, next) {
+
+  var idVal = req.params.id;
+
+  Recipe.where({ id: idVal }).fetch()
+    .then(function(articles) {
+      res.send(articles.toJSON());
+    }).catch(function(error) {
+      console.log(error);
+      res.send('An error occured');
+    });
+
+  var obj = { a: 1 };
+  var result = JSON.stringify(obj);
+
+});
+
+
 //posting title,content
 router.get('/recipe/:title/:content', function(req, res, next) {
 
